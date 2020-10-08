@@ -27,5 +27,3 @@ after_success:
   - docker push minhyup/docker-frontend
   - docker push minhyup/docker-backend
   - docker push minhyup/docker-nginx
-
-
