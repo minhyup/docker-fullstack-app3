@@ -12,7 +12,6 @@ services:
 before_install:
   - docker build -t minhyup/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
-
 # 실행할 스크립트 (테스트 실행)
 script:
   - docker run -e CI=true minhyup/react-test-app npm run test
