@@ -1,0 +1,52 @@
+# 도커 컴포즈 버전
+version: "3"
+services:
+  # 컨테이너 이름
+  frontend: 
+    # 개발환경을 위한 Dockerfile이 어디에 있는지 명시
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    volumes: 
+      - /app/node_modules
+      - ./frontend:/app
+    # 리액트 앱을 종료할 때 나오는 버그를 잡아줌
+    stdin_open: true
+
+  # 컨테이너 이름
+  nginx:
+    # 재시작 정책(no: 어떠한 상황에도 재시작 하지 않는다. , always: 항상 재시작, on-failure: 에러코드와 함께 컨테이너가 멈추었을때만 재시작 , unless-stopped: 개발자가 임의로 멈추려고 할때 빼고 재시작)
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports: 
+      - "3000:80"
+
+  # 컨테이너 이름
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./backend
+    container_name: app_backend
+    volumes: 
+      - /app/node_modules
+      - ./backend:/app
+    environment: 
+     - CHOKIDAR_USEPOLLING=true
+  # 컨테이너 이름
+  mysql:
+    build: ./mysql
+    restart: unless-stopped
+    container_name: app_mysql
+    tty: true
+    ports:
+      - "3306:3306"
+    # DB에 저장된 데이터를 컨테이너를 지우더라도 데이터가 지워지지 않을 수 있게 해주기 위한 볼륨
+    # 호스트 파일 시스템에 저장되고 도커에 의해서만 통제되는 도커Area에 저장되므로 컨테이너를 삭제해도 데이터는 사라지지 않는다.
+    volumes: 
+      - ./mysql/mysql_data:/var/lib/mysql
+      - ./mysql/sqls/:/docker-entrypoint-initdb.d/
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapp

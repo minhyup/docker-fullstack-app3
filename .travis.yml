@@ -1,0 +1,32 @@
+# 언어 선택
+language: generic
+
+# 관리자 권한 갖기
+sudo: required
+
+# 도커 환경 구성으로 만든다고 travis ci에게 명시
+services:
+  - docker
+
+# 스크립트를 실행할 수 있는 환경 구성
+before_install:
+  - docker build -t minhyup/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+
+
+# 실행할 스크립트 (테스트 실행)
+script:
+  - docker run -e CI=true minhyup/react-test-app npm run test
+
+# 테스트 성공 후 운영버전으로 이미지 빌드
+after_success:
+  - docker build -t minhyup/docker-frontend ./frontend
+  - docker build -t minhyup/docker-backend ./backend
+  - docker build -t minhyup/docker-nginx ./nginx
+  # 빌드된 이미지를 도커허브에 보내주기(도커 허브 로그인) TRAVIS CI에서 환경변수를 만들어줘야 이 스크립트에서 해당 변수를 읽을때 자동으로 해당하는 값으로 치환해준다.
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+  # 빌드된 이미지들을 도커허브에 push
+  - docker push minhyup/docker-frontend
+  - docker push minhyup/docker-backend
+  - docker push minhyup/docker-nginx
+
+
