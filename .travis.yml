@@ -43,7 +43,7 @@ deploy:
   bucket_path: "docker-fullstack-app"
   on:
     # 어떤 브랜치에 push할 때 AWS에 배포할 것인지 판단을 위한 브랜치명
-    branch: master
+    branch: main
 
   # travis ci에 AWS Elastic beanstalk에 부여한 IAM 사용자의 액세스키와 비밀키 정보를 등록한 값을 가져온다.
   access_key_id: $AWS_ACCESS_KEY
