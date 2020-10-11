@@ -36,7 +36,7 @@ deploy:
   region: "ap-northeast-2"
   # 생성된 어플리케이션의 이름
   app: "docker-fullstack-app"
-  env: DockerFullstackApp-env
+  env: "DockerFullstackApp-env"
   # EB를 위한 S3 버킷 이름
   bucket_name: elasticbeanstalk-ap-northeast-2-813906163992
   # 어플리케이션의 이름과 동일
