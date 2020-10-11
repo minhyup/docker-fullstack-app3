@@ -27,3 +27,24 @@ after_success:
   - docker push minhyup/docker-frontend
   - docker push minhyup/docker-backend
   - docker push minhyup/docker-nginx
+
+# 배포관련(github -> travis ci(aws에서 제공해주는 secret key를 travis yml 파일에 적어줘야 함) -> AWS)
+deploy:
+  # 외부 서비스 표시 (s3, elaticbeanstalk, firebase 등)
+  provider: elasticbeanstalk 
+  # 현재 사용하고 있는 AWS의 서비스가 위치하고 있는 물리적 장소(ex: us-east-1)
+  region: "ap-northeast-2"
+  # 생성된 어플리케이션의 이름
+  app: "docker-fullstack-app"
+  env: DockerFullstackApp-env
+  # EB를 위한 S3 버킷 이름
+  bucket_name: elasticbeanstalk-ap-northeast-2-813906163992
+  # 어플리케이션의 이름과 동일
+  bucket_path: "docker-fullstack-app"
+  on:
+    # 어떤 브랜치에 push할 때 AWS에 배포할 것인지 판단을 위한 브랜치명
+    branch: master
+
+  # travis ci에 AWS Elastic beanstalk에 부여한 IAM 사용자의 액세스키와 비밀키 정보를 등록한 값을 가져온다.
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
