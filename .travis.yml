@@ -31,7 +31,7 @@ after_success:
 # 배포관련(github -> travis ci(aws에서 제공해주는 secret key를 travis yml 파일에 적어줘야 함) -> AWS)
 deploy:
   # 외부 서비스 표시 (s3, elaticbeanstalk, firebase 등)
-  provider: elasticbeanstalk 
+  provider: elasticbeanstalk
   # 현재 사용하고 있는 AWS의 서비스가 위치하고 있는 물리적 장소(ex: us-east-1)
   region: "ap-northeast-2"
   # 생성된 어플리케이션의 이름
