@@ -16,7 +16,7 @@ before_install:
 script:
   - docker run -e CI=true minhyupp/react-test-app npm run test
 
-# 테스트 성공 후 운영버전으로 이미지 빌드
+# 테스트 성공 후 운영버전으로 이미지 빌드.
 after_success:
   - docker build -t minhyupp/docker-frontend ./frontend
   - docker build -t minhyupp/docker-backend ./backend
