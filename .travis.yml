@@ -10,11 +10,11 @@ services:
 
 # 스크립트를 실행할 수 있는 환경 구성
 before_install:
-  - docker build -t minhyup/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+  - docker build -t minhyupp/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
 # 실행할 스크립트 (테스트 실행)
 script:
-  - docker run -e CI=true minhyup/react-test-app npm run test
+  - docker run -e CI=true minhyupp/react-test-app npm run test
 
 # 테스트 성공 후 운영버전으로 이미지 빌드
 after_success:

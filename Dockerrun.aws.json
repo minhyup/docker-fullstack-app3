@@ -3,21 +3,21 @@
   "containerDefinitions": [
     {
       "name": "frontend",
-      "image": "minhyup/docker-frontend",
+      "image": "minhyupp/docker-frontend",
       "hostname": "frontend",
       "essential": false,
       "memory": 128
     },
     {
       "name": "backend",
-      "image": "minhyup/docker-backend",
+      "image": "minhyupp/docker-backend",
       "hostname": "backend",
       "essential": false,
       "memory": 128
     },
     {
       "name": "nginx",
-      "image": "minhyup/docker-nginx",
+      "image": "minhyupp/docker-nginx",
       "hostname": "nginx",
       "essential": true,
       "portMappings": [
