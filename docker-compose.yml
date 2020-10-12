@@ -36,7 +36,7 @@ services:
       MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: rootroot
-      MYSQL_DATABASE: myapp
+      MYSQL_DATABASE: myapp2
       MYSQL_PORT: 3306
     #  - MYSQL_HOST=mysql
     #  - MYSQL_USER=root
