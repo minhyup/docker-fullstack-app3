@@ -35,12 +35,12 @@ deploy:
   # 현재 사용하고 있는 AWS의 서비스가 위치하고 있는 물리적 장소(ex: us-east-1)
   region: "ap-northeast-2"
   # 생성된 어플리케이션의 이름
-  app: "docker-fullstack-app"
-  env: "DockerFullstackApp-env"
+  app: "docker-fullstack-app4"
+  env: "DockerFullstackApp4-env"
   # EB를 위한 S3 버킷 이름
   bucket_name: elasticbeanstalk-ap-northeast-2-813906163992
   # 어플리케이션의 이름과 동일
-  bucket_path: "docker-fullstack-app"
+  bucket_path: "docker-fullstack-app4"
   on:
     # 어떤 브랜치에 push할 때 AWS에 배포할 것인지 판단을 위한 브랜치명
     branch: main
